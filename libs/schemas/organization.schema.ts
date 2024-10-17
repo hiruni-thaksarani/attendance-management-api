@@ -7,6 +7,9 @@ export class Organization extends Document {
   name: string;
 
   @Prop({ required: true })
+  orgId: string;
+
+  @Prop({ required: true })
   contactNumber: string;
 
   @Prop({ required: true })

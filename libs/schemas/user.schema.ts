@@ -15,6 +15,9 @@ export enum UserType {
 @Schema()
 export class User extends Document {
   @Prop({ required: true })
+  orgId: string;
+
+  @Prop({ required: true })
   name: string;
 
   @Prop({ required: true, unique: true })

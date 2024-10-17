@@ -9,6 +9,8 @@ import { UserModule } from './user/user.module';
 import { OrganizationController } from './organization/organization.controller';
 import { OrganizationService } from './organization/organization.service';
 import { OrganizationModule } from './organization/organization.module';
+import { AuthModule } from './auth/auth.module';
+import { AttendanceModule } from './attendance/attendance.module';
 
 @Module({
   imports: [
@@ -19,6 +21,8 @@ import { OrganizationModule } from './organization/organization.module';
     MongooseModule.forRootAsync(mongooseModuleAsyncOptions),
     UserModule,
     OrganizationModule,
+    AuthModule,
+    AttendanceModule,
   ],
   controllers: [AppController],
   providers: [AppService],

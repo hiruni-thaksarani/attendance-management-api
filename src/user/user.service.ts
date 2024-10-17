@@ -26,4 +26,28 @@ export class UserService {
   async findAllEmployees(): Promise<User[]> {
     return this.userModel.find({ user_type: UserType.EMPLOYEE }).exec();
   }
+
+  async findByWalletAddress(address: string): Promise<User | null> {
+    console.log('Searching for user with address:', address);
+
+    // Normalize the address
+    const normalizedAddress = address.toLowerCase();
+
+    // Try to find the user with a case-insensitive search
+    const user = await this.userModel
+      .findOne({
+        walletAddress: { $regex: new RegExp(`^${normalizedAddress}$`, 'i') },
+      })
+      .exec();
+
+    console.log('User found:', user);
+
+    if (!user) {
+      // If user is not found, let's log all users in the database
+      const allUsers = await this.userModel.find({}).exec();
+      console.log('All users in database:', allUsers);
+    }
+
+    return user;
+  }
 }
