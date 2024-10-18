@@ -2,12 +2,14 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { User, UserRole, UserType } from 'libs/schemas/user.schema';
 import { Model } from 'mongoose';
+import { CreateEmployeeDto } from './dto/creatrEmployee.dto';
+import { CreateAdminDto } from './dto/createAdmin.dto';
 
 @Injectable()
 export class UserService {
   constructor(@InjectModel(User.name) private userModel: Model<User>) {}
 
-  async createAdmin(createAdminDto: any): Promise<User> {
+  async createAdmin(createAdminDto: CreateAdminDto): Promise<User> {
     return this.userModel.create({
       ...createAdminDto,
       role: UserRole.ADMIN,
@@ -15,7 +17,7 @@ export class UserService {
     });
   }
 
-  async createEmployee(createEmployeeDto: any): Promise<User> {
+  async createEmployee(createEmployeeDto: CreateEmployeeDto): Promise<User> {
     return this.userModel.create({
       ...createEmployeeDto,
       role: UserRole.EMPLOYEE,

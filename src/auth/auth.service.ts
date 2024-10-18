@@ -70,6 +70,7 @@ export class AuthService {
     role?: string;
     organizationId?: string;
     orgId?: string;
+    userId?: string;
     message?: string;
   }> {
     try {
@@ -87,22 +88,24 @@ export class AuthService {
       }
 
       const token = jwt.sign(
-        { 
-          address, 
-          role: userRole, 
-          organizationId: user.organizationId, 
-          orgId: user.orgId 
-        }, 
-        this.jwtSecret, 
-        { expiresIn: '1h' }
+        {
+          address,
+          role: userRole,
+          organizationId: user.organizationId,
+          userId: user._id,
+          orgId: user.orgId,
+        },
+        this.jwtSecret,
+        { expiresIn: '1h' },
       );
 
-      return { 
-        success: true, 
-        token, 
-        role: userRole, 
-        organizationId: user.organizationId, 
-        orgId: user.orgId 
+      return {
+        success: true,
+        token,
+        role: userRole,
+        organizationId: user.organizationId,
+        userId: user._id.toString(),
+        orgId: user.orgId,
       };
     } catch (error) {
       console.error('Login verification failed:', error);
