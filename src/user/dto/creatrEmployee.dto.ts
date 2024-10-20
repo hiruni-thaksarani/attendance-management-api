@@ -11,7 +11,7 @@ export class CreateEmployeeDto {
   name: string;
 
   @IsNotEmpty()
-  @IsEmail()
+//   @IsEmail()
   email: string;
 
   @IsEnum(UserRole)
